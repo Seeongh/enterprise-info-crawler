@@ -3,7 +3,6 @@ package com.antock.enterprise_info_crawler.api.coseller.application.dto.request;
 import com.antock.enterprise_info_crawler.api.coseller.value.City;
 import com.antock.enterprise_info_crawler.api.coseller.value.District;
 import com.antock.enterprise_info_crawler.common.valid.ValidEnum;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

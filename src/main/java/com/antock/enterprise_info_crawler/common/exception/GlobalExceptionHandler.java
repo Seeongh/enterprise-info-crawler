@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    //Enum 매핑 실패시 Exception 
+    //Enum 매핑 실패시 Exception
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ApiResponse<?> handleInvalidEnum(Exception e) {
         return ApiResponse.of(HttpStatus.BAD_REQUEST, e.getMessage());
