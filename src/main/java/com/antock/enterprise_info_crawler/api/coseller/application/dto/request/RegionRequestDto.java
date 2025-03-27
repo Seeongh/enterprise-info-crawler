@@ -1,17 +1,22 @@
-package com.antock.enterprise_info_crawler.api.coseller.application.dto;
+package com.antock.enterprise_info_crawler.api.coseller.application.dto.request;
 
+import com.antock.enterprise_info_crawler.api.coseller.value.City;
+import com.antock.enterprise_info_crawler.api.coseller.value.District;
+import com.antock.enterprise_info_crawler.common.valid.ValidEnum;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
 @Builder
+@ToString
 @AllArgsConstructor
 public class RegionRequestDto {
 
-    @NotBlank(message= "시/도 정보를 입력해 주세요.")
-    private String city;
-    @NotBlank(message= "구/군 정보를 입력해 주세요.")
-    private String district;
+    @ValidEnum(target = City.class, message = "시/도 정보를 확인해 주세요.")
+    private City city;
+    @ValidEnum(target = District.class, message= "구/군 정보를 확인해 주세요.")
+    private District district;
 }
