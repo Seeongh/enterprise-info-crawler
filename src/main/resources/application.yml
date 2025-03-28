@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:mem:testdb;
     driver-class-name: org.h2.Driver
     username: sa
     password:
@@ -27,7 +27,7 @@ logging:
 csv:
   file-template: '%s_%s.csv'
 
-#?????? ????? api??
+#?? ?? ?? ?? api ??
 corp-info:
   url: https://apis.data.go.kr/1130000/MllBsDtl_2Service
   endpoint: /getMllBsInfoDetail_2
@@ -37,7 +37,7 @@ corp-info:
     numOfRows: '1'
     resultType: 'json'
 
-#?????? ????? api??
+#?? ?? ?? ?? api ??
 region-info:
   url: 'https://business.juso.go.kr/addrlink/addrLinkApi.do'
   confmKey: 'devU01TX0FVVEgyMDI1MDMyNTE1MTgxMTExNTU3NzE='
