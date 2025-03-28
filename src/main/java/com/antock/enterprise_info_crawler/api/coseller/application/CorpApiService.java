@@ -1,5 +1,6 @@
 package com.antock.enterprise_info_crawler.api.coseller.application;
 
+import com.antock.enterprise_info_crawler.api.coseller.application.client.CorpApiClient;
 import com.antock.enterprise_info_crawler.api.coseller.application.dto.api.CorpApiJsonResponse;
 import com.antock.enterprise_info_crawler.api.coseller.application.dto.api.CorpItem;
 import com.antock.enterprise_info_crawler.api.coseller.application.dto.properties.CorpApiProperties;
@@ -23,7 +24,7 @@ import java.util.concurrent.CompletableFuture;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class CorpApiService {
+public class CorpApiService implements CorpApiClient {
 
     private final RestTemplate restTemplate;
     private final CorpApiProperties corpProp;

@@ -1,5 +1,6 @@
 package com.antock.enterprise_info_crawler.api.coseller.application;
 
+import com.antock.enterprise_info_crawler.api.coseller.application.client.RegionApiClient;
 import com.antock.enterprise_info_crawler.api.coseller.application.dto.api.RegionApiJsonResponse;
 import com.antock.enterprise_info_crawler.api.coseller.application.dto.properties.RegionApiProperties;
 import com.antock.enterprise_info_crawler.utils.AddressUtil;
@@ -22,7 +23,7 @@ import java.util.concurrent.CompletableFuture;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class RegionApiService {
+public class RegionApiService implements RegionApiClient {
 
     private final RestTemplate restTemplate;
     private final RegionApiProperties regionProp;
