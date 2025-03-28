@@ -1,6 +1,6 @@
 package com.antock.enterprise_info_crawler.api.coseller.application;
 
-import com.antock.enterprise_info_crawler.api.coseller.application.dto.BizCsvInfo;
+import com.antock.enterprise_info_crawler.api.coseller.application.dto.BizCsvInfoDto;
 import com.antock.enterprise_info_crawler.common.constants.CsvConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,7 +11,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Slf4j
@@ -20,8 +19,8 @@ public class CsvService {
 
     @Value("${csv.file-template}")
     private String fileTemplate; // application.yml에서 설정한 파일 경로 템플릿
-    public List<BizCsvInfo> readBizCsv(String city, String district) {
-        String fileName = String.format(fileTemplate, city, district); //통신판매사업자_city_district.csv
+    public List<BizCsvInfoDto> readBizCsv(String city, String district) {
+        String fileName = String.format(fileTemplate, city, district); //city_district.csv
         ClassPathResource resource = new ClassPathResource("csvFiles/" + fileName);
 
         try (
@@ -56,9 +55,9 @@ public class CsvService {
      * @param tokens
      * @return
      */
-    private BizCsvInfo parseCsvData(String[] tokens) {
+    private BizCsvInfoDto parseCsvData(String[] tokens) {
 
-        return BizCsvInfo.builder()
+        return BizCsvInfoDto.builder()
                 .sellerId(tokens[0].trim())
                 .bizNm(tokens[2].trim())
                 .bizNo(tokens[3].trim())

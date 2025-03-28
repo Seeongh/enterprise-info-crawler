@@ -26,3 +26,14 @@ logging:
 
 csv:
   file-template: '%s_%s.csv'
+
+#?????? ????? api??
+corp-info:
+  url: https://apis.data.go.kr/1130000/MllBsDtl_2Service
+  endpoint: /getMllBsInfoDetail_2
+  serviceKey: '%2BJlmGg9b7HFab38I1RWO6JGL5Zuq5NLQ6oRlzAmlEf9DEVKp6GAqRTX7hGdcM3Ogu10%2FL2gTMeeZ8NHqCJDLag%3D%3D'
+  query-params:
+    pageNo: '1'
+    numOfRows: '1'
+    resultType: 'json'
+
