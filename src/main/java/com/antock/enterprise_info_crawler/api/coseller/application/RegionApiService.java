@@ -1,9 +1,8 @@
 package com.antock.enterprise_info_crawler.api.coseller.application;
 
 import com.antock.enterprise_info_crawler.api.coseller.application.dto.api.RegionApiJsonResponse;
-import com.antock.enterprise_info_crawler.api.coseller.application.dto.api.RegionJuso;
 import com.antock.enterprise_info_crawler.api.coseller.application.dto.properties.RegionApiProperties;
-import com.antock.enterprise_info_crawler.util.AddressUtil;
+import com.antock.enterprise_info_crawler.utils.AddressUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
