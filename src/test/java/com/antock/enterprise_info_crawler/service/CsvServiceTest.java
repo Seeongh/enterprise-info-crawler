@@ -1,19 +1,14 @@
 package com.antock.enterprise_info_crawler.service;
 
 import com.antock.enterprise_info_crawler.api.coseller.application.CsvService;
-import com.antock.enterprise_info_crawler.api.coseller.application.dto.BizCsvInfo;
+import com.antock.enterprise_info_crawler.api.coseller.application.dto.BizCsvInfoDto;
 import com.antock.enterprise_info_crawler.api.coseller.value.City;
 import com.antock.enterprise_info_crawler.api.coseller.value.District;
 import com.antock.enterprise_info_crawler.common.constants.CsvConstants;
 import org.assertj.core.api.Assertions;
-import org.hibernate.annotations.CurrentTimestamp;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -44,14 +39,14 @@ public class CsvServiceTest {
 
         //when
          long startTime =  System.currentTimeMillis();
-        List<BizCsvInfo> list = csvService.readBizCsv(city.name(), district.name());
+        List<BizCsvInfoDto> list = csvService.readBizCsv(city.name(), district.name());
 
         long endTime =  System.currentTimeMillis();
         System.out.println("소요시간 = " + (endTime - startTime) + " ms");
         //then
         assertNotNull(list);
 
-        BizCsvInfo info = list.get(0);
+        BizCsvInfoDto info = list.get(0);
         Assertions.assertThat(CsvConstants.CORP_TYPE_BIZ).isEqualTo(info.getBizType());
      }
 }
