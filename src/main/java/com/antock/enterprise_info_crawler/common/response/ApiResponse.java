@@ -35,6 +35,9 @@ public class ApiResponse<T> {
     public static <T> ApiResponse<T> of(HttpStatus resultStatus, T data) {
         return new ApiResponse<>(resultStatus, resultStatus.getReasonPhrase(), data);
     }
+    public static <T> ApiResponse<T> of(HttpStatus resultStatus, String resultMsg, T data) {
+        return new ApiResponse<>(resultStatus, resultMsg, data);
+    }
 
 
 

@@ -50,6 +50,7 @@ public class CsvService {
             return new BufferedReader(new InputStreamReader(resource.getInputStream(), Charset.forName("EUC-KR")));
         } catch (IOException e) {
             log.debug("요청한 CSV 파일 없음. 기본 파일로 대체. 요청 파일: {}", resource.getFilename());
+            log.info("요청한 CSV 파일 없음. 기본 파일로 대체.");
             String defaultFileName = String.format(fileTemplate, CsvConstants.DEFAULT_CITY, CsvConstants.DEFAULT_DISTRICT);
             ClassPathResource defaultResource = new ClassPathResource("csvFiles/" + defaultFileName);
             return new BufferedReader(new InputStreamReader(defaultResource.getInputStream(), Charset.forName("EUC-KR")));

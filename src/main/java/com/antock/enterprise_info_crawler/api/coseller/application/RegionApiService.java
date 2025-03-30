@@ -3,10 +3,12 @@ package com.antock.enterprise_info_crawler.api.coseller.application;
 import com.antock.enterprise_info_crawler.api.coseller.application.client.RegionApiClient;
 import com.antock.enterprise_info_crawler.api.coseller.application.dto.api.RegionApiJsonResponse;
 import com.antock.enterprise_info_crawler.api.coseller.application.dto.properties.RegionApiProperties;
+import com.antock.enterprise_info_crawler.common.exception.ExternalApiException;
 import com.antock.enterprise_info_crawler.utils.AddressUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -39,8 +41,8 @@ public class RegionApiService implements RegionApiClient {
 
         try{
             ResponseEntity<String> response = restTemplate.getForEntity(requestUrl, String.class);
-            log.debug("CorpRegNo API Response {} : {}", address, response.getBody());
-            log.info("CorpRegNo API get Response success");
+            log.debug("Region API Response {} : {}", address, response.getBody());
+            log.info("Region API get Response success");
 
             if (response.getStatusCode().is2xxSuccessful()) {
                 return CompletableFuture.completedFuture(parseRegionResponse(response.getBody()));
@@ -50,9 +52,9 @@ public class RegionApiService implements RegionApiClient {
         } catch (ResourceAccessException e) {
             log.error("네트워크 오류 또는 타임아웃: {}", e.getMessage());
         } catch (RestClientException e) {
-            log.error("RestTemplate 예외 발생: {}", e.getMessage());
+            throw new ExternalApiException(HttpStatus.BAD_GATEWAY, "통신에 실패하였습니다.");
         } catch (Exception e) {
-            log.error("예상치 못한 예외: {}", e.getMessage());
+            throw new ExternalApiException(HttpStatus.BAD_GATEWAY, "통신에 실패하였습니다.");
         }
 
         return CompletableFuture.completedFuture(regionCd);
@@ -71,6 +73,6 @@ public class RegionApiService implements RegionApiClient {
             log.error("Region API 응답 파싱 실패: {}", e.getMessage());
         }
 
-        return null;
+        return "";
     }
 }
