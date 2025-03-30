@@ -10,6 +10,7 @@ import com.antock.enterprise_info_crawler.api.coseller.application.dto.BizCsvInf
 import com.antock.enterprise_info_crawler.api.coseller.application.dto.CorpMastCreateDTO;
 import com.antock.enterprise_info_crawler.api.coseller.application.dto.request.RegionRequestDto;
 import com.antock.enterprise_info_crawler.api.coseller.infrastructure.CorpMastRepository;
+import com.antock.enterprise_info_crawler.api.coseller.infrastructure.CorpMastStore;
 import com.antock.enterprise_info_crawler.api.coseller.value.City;
 import com.antock.enterprise_info_crawler.api.coseller.value.District;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +36,7 @@ public class CoSellerServiceTest {
     private CsvService csvService;
     @Mock private CorpApiClient corpApiClient;
     @Mock private RegionApiClient regionApiClient;
-    @Mock private CorpMastRepository corpMastRepository;
+    @Mock private CorpMastStore corpMastStore;
 
     @InjectMocks
     private CoSellerService coSellerService;
@@ -93,15 +94,14 @@ public class CoSellerServiceTest {
                 .thenReturn(CompletableFuture.completedFuture("1168010300"));
 
         //mock 저장 수행
-        when(corpMastRepository.saveAll(anyList()))
-                .thenAnswer(invocation -> invocation.getArgument(0));
+        doNothing().when(corpMastStore).saveAll(anyList());
 
         // when
         int savedCount = coSellerService.saveCoSeller(requestDto);
 
         // then
         assertThat(savedCount).isEqualTo(2);
-        verify(corpMastRepository, times(1)).saveAll(anyList());
+        verify(corpMastStore, times(1)).saveAll(anyList());
     }
     @Test
     @DisplayName("csv list를 넣어서 dto 반환 코드 검증 ")

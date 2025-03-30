@@ -7,6 +7,7 @@ import com.antock.enterprise_info_crawler.api.coseller.application.dto.CorpMastC
 import com.antock.enterprise_info_crawler.api.coseller.application.dto.request.RegionRequestDto;
 import com.antock.enterprise_info_crawler.api.coseller.domain.CorpMast;
 import com.antock.enterprise_info_crawler.api.coseller.infrastructure.CorpMastRepository;
+import com.antock.enterprise_info_crawler.api.coseller.infrastructure.CorpMastStore;
 import com.antock.enterprise_info_crawler.common.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +38,7 @@ public class CoSellerService {
     // 행정 구역 코드 조회 api 호출
     private final RegionApiClient regionApiClient;
     // Repository
-    private final CorpMastRepository corpMastRepository;
+    private final CorpMastStore corpMastStore;
 
     /**
      * 법인 데이터 저장 로직
@@ -70,7 +71,7 @@ public class CoSellerService {
 
         try {
             log.info("saveAll 시작 - 총 {}건", entityList.size());
-            corpMastRepository.saveAll(entityList);
+            corpMastStore.saveAll(entityList);
             savedCount = entityList.size();
             log.info("saveAll 성공 - 저장된 건수: {}", savedCount);
         } catch (DataIntegrityViolationException e) {
@@ -78,7 +79,7 @@ public class CoSellerService {
 
             for (CorpMast entity : entityList) {
                 try {
-                    corpMastRepository.save(entity);
+                    corpMastStore.save(entity);
                     savedCount++;
                 } catch (DataIntegrityViolationException dupEx) {
                     duplicatedBizNos.add(entity.getBizNo());
