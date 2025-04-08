@@ -66,11 +66,11 @@
 
 ---
 ## 결과 공유
-- 정상 요청 (data: 저장성공한 )
+- 정상 요청 (data: 저장성공 )
 ![image](https://github.com/user-attachments/assets/3d7d439c-96c7-4b71-ba35-89378aac5852)
 - 비정상 요청
  ![image](https://github.com/user-attachments/assets/6e0ba8d4-a98b-492b-8427-71ccba8363bd)
-- 중복 요청시 (추후 업서트 변경 고민)
+- 중복 요청
   ![image](https://github.com/user-attachments/assets/fbf31a89-42ff-44d2-9514-8f04dd1dbc41)
 
 
